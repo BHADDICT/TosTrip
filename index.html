@@ -1,0 +1,1944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafeTrip Cambodia - Your Gateway to Amazing Cambodia</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="book.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        .language-selector {
+            position: relative;
+        }
+
+        .language-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .language-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            min-width: 150px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        .language-dropdown.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .language-option {
+            padding: 0.8rem 1rem;
+            cursor: pointer;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background 0.3s ease;
+        }
+
+        .language-option:hover {
+            background: #f5f5f5;
+        }
+
+        .language-option:first-child {
+            border-radius: 10px 10px 0 0;
+        }
+
+        .language-option:last-child {
+            border-radius: 0 0 10px 10px;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23228B22" width="1200" height="600"/><path fill="%23FFD700" d="M300 150h600v300h-600z"/><circle fill="%23DC143C" cx="600" cy="300" r="80"/></svg>');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8));
+            animation: gradientShift 10s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background: linear-gradient(45deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8)); }
+            50% { background: linear-gradient(45deg, rgba(118, 75, 162, 0.8), rgba(102, 126, 234, 0.8)); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 2rem;
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-btn.primary {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            box-shadow: 0 4px 15px rgba(238, 90, 36, 0.4);
+        }
+
+        .cta-btn.secondary {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid white;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .feature-card:hover::before {
+            left: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+        /* Business Registration Section */
+        .business-reg {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .reg-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .reg-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .reg-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .reg-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .reg-feature {
+            padding: 1.5rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .reg-feature:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-5px);
+        }
+
+        .reg-feature i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #ffd700;
+        }
+
+        /* Footer */
+        .footer {
+            background: #222;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        .footer-section a:hover {
+            color: #667eea;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #999;
+        }
+
+        /* AI Chatbot */
+        .chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .chatbot-trigger {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .chatbot-trigger:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4); }
+            50% { box-shadow: 0 4px 30px rgba(102, 126, 234, 0.8); }
+            100% { box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4); }
+        }
+
+        .chatbot-window {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.2);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chatbot-header {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            padding: 0.8rem;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+
+        .message.bot {
+            background: #f0f0f0;
+            align-self: flex-start;
+        }
+
+        .message.user {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            align-self: flex-end;
+            margin-left: auto;
+        }
+
+        .chatbot-input {
+            display: flex;
+            padding: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .chatbot-input input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            outline: none;
+        }
+
+        .chatbot-input button {
+            margin-left: 0.5rem;
+            padding: 0.8rem 1.2rem;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+        .hero {
+    position: relative;
+    height: 100vh; /* full screen height */
+    background: url("https://lp-cms-production.imgix.net/2025-01/Cambodia-Angkor-Wat-Waj-shutterstockRF312461543-crop.jpg?auto=format,compress&q=72&w=1440&h=810&fit=crop") no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.4); /* darker overlay */
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2; /* ensures text appears above overlay */
+}
+
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .chatbot-window {
+                width: 90vw;
+                height: 70vh;
+                right: 5vw;
+            }
+
+            .features-grid,
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll animations */
+        .scroll-animation {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+
+        .scroll-animation.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hidden class for language switching */
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <span data-translate="site-title">TosTrip</span>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#home" class="nav-link" data-translate="nav-home">Home</a></li>
+                    <li><a href="#features" class="nav-link" data-translate="nav-features">Features</a></li>
+                    <li><a href="#services" class="nav-link" data-translate="nav-services">Services</a></li>
+                    <li><a href="#register" class="nav-link" data-translate="nav-register">Register Business</a></li>
+                    <li><a href="./Offline.html" class="nav-link" data-translate="nav-contact">Offlinemode</a></li>
+                </ul>
+            </nav>
+            <div class="language-selector">
+                <button class="language-btn" onclick="toggleLanguageDropdown()">
+                    <i class="fas fa-globe"></i>
+                    <span id="current-language">English</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="language-dropdown" id="language-dropdown">
+                    <div class="language-option" onclick="changeLanguage('en')">
+                        🇺🇸 English
+                    </div>
+                    <div class="language-option" onclick="changeLanguage('km')">
+                        🇰🇭 ខ្មែរ
+                    </div>
+                    <div class="language-option" onclick="changeLanguage('zh')">
+                        🇨🇳 中文
+                    </div>
+                    <div class="language-option" onclick="changeLanguage('ja')">
+                        🇯🇵 日本語
+                    </div>
+                    <div class="language-option" onclick="changeLanguage('ms')">
+                        🇲🇾 Bahasa Melayu
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+<section id="home" class="hero">
+    <div class="hero-content">
+        <h1 data-translate="hero-title"> Cambodia at your fingertips</h1>
+        <p data-translate="hero-subtitle">
+           Travel safer, travel smarter 
+        </p>
+        <div class="cta-buttons">
+            <a href="#" class="cta-btn primary" data-translate="cta-explore">Explore Tours</a>
+            <a href="#register" class="cta-btn secondary" data-translate="cta-register">Join Our Network</a>
+        </div>
+    </div>
+</section>
+
+  <div class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">500+</span>
+                    <span class="stat-label">Happy Travelers</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">25+</span>
+                    <span class="stat-label">Tour Packages</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">4.9★</span>
+                    <span class="stat-label">Average Rating</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">10+</span>
+                    <span class="stat-label">Years Experience</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title scroll-animation" data-translate="features-title">Why Choose SafeTrip Cambodia?</h2>
+            <div class="features-grid">
+                <div class="feature-card scroll-animation">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 data-translate="feature-ai-title">AI Travel Assistant</h3>
+                    <p data-translate="feature-ai-desc">Get personalized recommendations and instant support from our intelligent chatbot available 24/7</p>
+                </div>
+                <div class="feature-card scroll-animation">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 data-translate="feature-safe-title">Safe & Secure</h3>
+                    <p data-translate="feature-safe-desc">All our partners are verified and certified to ensure your safety and peace of mind</p>
+                </div>
+                <div class="feature-card scroll-animation">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 data-translate="feature-guide-title">Expert Local Guides</h3>
+                    <p data-translate="feature-guide-desc">Connect with experienced local guides who know Cambodia's hidden gems and culture</p>
+                </div>
+                <div class="feature-card scroll-animation">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3 data-translate="feature-booking-title">Easy Booking</h3>
+                    <p data-translate="feature-booking-desc">Book tours, hotels, and transportation with just a few clicks on our user-friendly platform</p>
+                </div>
+                <div class="feature-card scroll-animation">
+                    <div class="feature-icon">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <h3 data-translate="feature-multilingual-title">Multilingual Support</h3>
+                    <p data-translate="feature-multilingual-desc">Available in Khmer, English, Chinese, Japanese, and Malay for your convenience</p>
+                </div>
+                <div class="feature-card scroll-animation">
+                    <div class="feature-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3 data-translate="feature-partnership-title">Business Partnership</h3>
+                    <p data-translate="feature-partnership-desc">Join our network of hotels, restaurants, and service providers to grow your business</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="packages" class="section">
+        <div class="container">
+            <h2 class="section-title">Featured Tour Packages</h2>
+            
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">All Tours</button>
+                <button class="filter-btn" data-filter="cultural">Cultural</button>
+                <button class="filter-btn" data-filter="adventure">Adventure</button>
+                <button class="filter-btn" data-filter="nature">Nature</button>
+                <button class="filter-btn" data-filter="luxury">Luxury</button>
+                <button class="filter-btn" data-filter="budget">Budget</button>
+            </div>
+
+            <div class="packages-grid" id="packagesGrid">
+                <!-- Angkor Wat Cultural Tour -->
+                <div class="package-card" data-category="cultural" data-price="299">
+                   <div class="package-image">
+            <img src="https://blog.bangkokair.com/wp-content/uploads/2024/07/visiting-angkor-wat-guide.jpg" alt="Angkor Wat Sunrise">
+        </div>
+                    <div class="package-content">
+                        <h3 class="package-title">Angkor Wat Cultural Discovery</h3>
+                        <div class="package-location">📍 Siem Reap Province</div>
+                        <div class="rating">
+                            <div class="stars">
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                            </div>
+                            <span class="rating-text">(4.9) 234 reviews</span>
+                        </div>
+                        <p class="package-description">
+                            Experience the magnificent Angkor Wat at sunrise, explore ancient temples including Bayon and Ta Prohm, and immerse yourself in Khmer culture with local guides.
+                        </p>
+                        <div class="package-features">
+                            <span class="feature-tag">English Guide</span>
+                            <span class="feature-tag">Temple Pass</span>
+                            <span class="feature-tag">Transport</span>
+                            <span class="feature-tag">Breakfast</span>
+                        </div>
+                        <div class="package-footer">
+                            <div>
+                                <div class="package-price">$299</div>
+                                <div class="package-duration">3 Days / 2 Nights</div>
+                            </div>
+                            <button class="book-btn" onclick="bookTour('Angkor Wat Cultural Discovery')">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mekong River Adventure -->
+                <div class="package-card" data-category="adventure nature" data-price="189">
+                            <div class="package-image">
+            <img src="https://impresstravel.com/wp-content/uploads/2024/06/do-adventure-kayaking-for-the-mekong-river-tour-6.jpg">
+        </div>
+                    <div class="package-content">
+                        <h3 class="package-title">Mekong River Adventure</h3>
+                        <div class="package-location">📍 Kratie & Stung Treng</div>
+                        <div class="rating">
+                            <div class="stars">
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">☆</span>
+                            </div>
+                            <span class="rating-text">(4.7) 156 reviews</span>
+                        </div>
+                        <p class="package-description">
+                            Cruise the mighty Mekong River, spot rare Irrawaddy dolphins, visit floating villages, and experience rural Cambodian life along the riverbanks.
+                        </p>
+                        <div class="package-features">
+                            <span class="feature-tag">Dolphin Watching</span>
+                            <span class="feature-tag">River Cruise</span>
+                            <span class="feature-tag">Village Visit</span>
+                            <span class="feature-tag">Eco-Friendly</span>
+                        </div>
+                        <div class="package-footer">
+                            <div>
+                                <div class="package-price">$189</div>
+                                <div class="package-duration">2 Days / 1 Night</div>
+                            </div>
+                            <button class="book-btn" onclick="bookTour('Mekong River Adventure')">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phnom Penh Luxury Experience -->
+                <div class="package-card" data-category="luxury cultural" data-price="599">
+                           <div class="package-image">
+            <img src="https://i0.wp.com/www.cambodialifestyle.com/wp-content/uploads/2024/02/Royal-Palace.jpg?fit=1400%2C933&ssl=1" alt="Angkor Wat Sunrise">
+        </div>
+                    <div class="package-content">
+                        <h3 class="package-title">Phnom Penh Royal Experience</h3>
+                        <div class="package-location">📍 Phnom Penh Capital</div>
+                        <div class="rating">
+                            <div class="stars">
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                            </div>
+                            <span class="rating-text">(4.8) 89 reviews</span>
+                        </div>
+                        <p class="package-description">
+                            Luxury tour of Cambodia's capital featuring the Royal Palace, Silver Pagoda, fine dining at rooftop restaurants, and premium accommodation.
+                        </p>
+                        <div class="package-features">
+                            <span class="feature-tag">5-Star Hotel</span>
+                            <span class="feature-tag">Private Guide</span>
+                            <span class="feature-tag">Fine Dining</span>
+                            <span class="feature-tag">Airport Transfer</span>
+                        </div>
+                        <div class="package-footer">
+                            <div>
+                                <div class="package-price">$599</div>
+                                <div class="package-duration">4 Days / 3 Nights</div>
+                            </div>
+                            <button class="book-btn" onclick="bookTour('Phnom Penh Royal Experience')">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coastal Adventure Kep & Kampot -->
+                <div class="package-card" data-category="nature adventure" data-price="259">
+                            <div class="package-image">
+            <img src="https://www.neverendingvoyage.com/wp-content/uploads/2014/03/durian-statue-kampot-cambodia.jpg">
+        </div>
+                    <div class="package-content">
+                        <h3 class="package-title">Coastal Escape: Kep & Kampot</h3>
+                        <div class="package-location">📍 Kep & Kampot Provinces</div>
+                        <div class="rating">
+                            <div class="stars">
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">☆</span>
+                            </div>
+                            <span class="rating-text">(4.6) 198 reviews</span>
+                        </div>
+                        <p class="package-description">
+                            Explore the famous crab markets of Kep, relax on pristine beaches, visit pepper plantations in Kampot, and enjoy fresh seafood by the coast.
+                        </p>
+                        <div class="package-features">
+                            <span class="feature-tag">Beach Access</span>
+                            <span class="feature-tag">Crab Market</span>
+                            <span class="feature-tag">Pepper Farm</span>
+                            <span class="feature-tag">Seafood Tour</span>
+                        </div>
+                        <div class="package-footer">
+                            <div>
+                                <div class="package-price">$259</div>
+                                <div class="package-duration">3 Days / 2 Nights</div>
+                            </div>
+                            <button class="book-btn" onclick="bookTour('Coastal Escape: Kep & Kampot')">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mondulkiri Jungle Adventure -->
+                <div class="package-card" data-category="adventure nature" data-price="349">
+                         <div class="package-image">
+            <img src="https://trekking-cambodia.com/wp-content/uploads/Day-Elephant-Adventure_20220129140914.jpg">
+        </div>
+                    <div class="package-content">
+                        <h3 class="package-title">Mondulkiri Jungle Trek</h3>
+                        <div class="package-location">📍 Mondulkiri Province</div>
+                        <div class="rating">
+                            <div class="stars">
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                            </div>
+                            <span class="rating-text">(4.9) 127 reviews</span>
+                        </div>
+                        <p class="package-description">
+                            Trek through pristine jungles, visit ethical elephant sanctuaries, discover waterfalls, and experience the culture of indigenous Bunong people.
+                        </p>
+                        <div class="package-features">
+                            <span class="feature-tag">Elephant Sanctuary</span>
+                            <span class="feature-tag">Jungle Trekking</span>
+                            <span class="feature-tag">Waterfall Visit</span>
+                            <span class="feature-tag">Cultural Immersion</span>
+                        </div>
+                        <div class="package-footer">
+                            <div>
+                                <div class="package-price">$349</div>
+                                <div class="package-duration">4 Days / 3 Nights</div>
+                            </div>
+                            <button class="book-btn" onclick="bookTour('Mondulkiri Jungle Trek')">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Budget Backpacker Special -->
+                <div class="package-card" data-category="budget adventure" data-price="129">
+                               <div class="package-image">
+            <img src="https://i0.wp.com/sotheadventurebegins.com/wp-content/uploads/2023/06/3-WEEK-ITINERARY-1-1.png?fit=1920%2C1080&ssl=1">
+        </div>
+                    <div class="package-content">
+                        <h3 class="package-title">Backpacker's Cambodia Circuit</h3>
+                        <div class="package-location">📍 Multi-City Tour</div>
+                        <div class="rating">
+                            <div class="stars">
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">☆</span>
+                            </div>
+                            <span class="rating-text">(4.4) 312 reviews</span>
+                        </div>
+                        <p class="package-description">
+                            Budget-friendly adventure covering Siem Reap temples, Phnom Penh highlights, and Sihanoukville beaches with hostel accommodation and group activities.
+                        </p>
+                        <div class="package-features">
+                            <span class="feature-tag">Hostel Stay</span>
+                            <span class="feature-tag">Group Tour</span>
+                            <span class="feature-tag">Temple Pass</span>
+                            <span class="feature-tag">Beach Time</span>
+                        </div>
+                        <div class="package-footer">
+                            <div>
+                                <div class="package-price">$129</div>
+                                <div class="package-duration">5 Days / 4 Nights</div>
+                            </div>
+                            <button class="book-btn" onclick="bookTour('Backpacker Cambodia Circuit')">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+
+    <!-- Business Registration Section -->
+ <div class="container">
+        <!-- Navigation Tabs -->
+        <nav class="nav-tabs">
+            <a href="#" class="nav-tab active" data-tab="register">Join Network</a>
+            <a href="#" class="nav-tab" data-tab="browse">Browse Businesses</a>
+        </nav>
+
+        <!-- Register Tab Content -->
+        <div id="register" class="tab-content active">
+            <section class="business-reg">
+                <div class="reg-content">
+                    <h2>Join Our Business Network</h2>
+                    <p>Partner with SafeTrip Cambodia to reach more customers and grow your tourism business</p>
+                    
+                    <div class="reg-features">
+                        <div class="reg-feature">
+                            <i class="fas fa-hotel"></i>
+                            <h3>Hotels & Resorts</h3>
+                            <p>List your property and reach international travelers</p>
+                        </div>
+                        <div class="reg-feature">
+                            <i class="fas fa-utensils"></i>
+                            <h3>Restaurants</h3>
+                            <p>Showcase your cuisine to food-loving tourists</p>
+                        </div>
+                        <div class="reg-feature">
+                            <i class="fas fa-bus"></i>
+                            <h3>Transportation</h3>
+                            <p>Offer your transport services to travelers</p>
+                        </div>
+                        <div class="reg-feature">
+                            <i class="fas fa-user-tie"></i>
+                            <h3>Tour Guides</h3>
+                            <p>Connect with tourists seeking authentic experiences</p>
+                        </div>
+                    </div>
+                    
+                    <button class="cta-btn" id="registerBtn">Register Your Business</button>
+                </div>
+            </section>
+        </div>
+
+        <!-- Browse Tab Content -->
+        <div id="browse" class="tab-content">
+            <section class="business-listings">
+                <div class="listings-header">
+                    <h2>Our Trusted Business Partners</h2>
+                    <p>Discover amazing local businesses across Cambodia</p>
+                </div>
+
+                <div class="filter-tabs">
+                    <button class="filter-btn active" data-filter="all">All Businesses</button>
+                    <button class="filter-btn" data-filter="hotel">Hotels & Resorts</button>
+                    <button class="filter-btn" data-filter="restaurant">Restaurants</button>
+                    <button class="filter-btn" data-filter="transport">Transportation</button>
+                    <button class="filter-btn" data-filter="guide">Tour Guides</button>
+                    <button class="filter-btn" data-filter="activity">Activities</button>
+                </div>
+
+                <div class="business-grid" id="businessGrid">
+                    <div class="empty-state" id="emptyState">
+                        <i class="fas fa-store"></i>
+                        <h3>No businesses registered yet</h3>
+                        <p>Be the first to join our network!</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Registration Modal -->
+    <div id="registrationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2>Business Registration</h2>
+                <p>Join SafeTrip Cambodia's trusted network of tourism partners</p>
+            </div>
+            
+            <div class="form-container">
+                <form id="businessRegistrationForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="businessName">Business Name <span class="required">*</span></label>
+                            <input type="text" id="businessName" name="businessName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="businessType">Business Type <span class="required">*</span></label>
+                            <select id="businessType" name="businessType" required>
+                                <option value="">Select Business Type</option>
+                                <option value="hotel">Hotel/Resort</option>
+                                <option value="restaurant">Restaurant</option>
+                                <option value="transport">Transportation</option>
+                                <option value="guide">Tour Guide</option>
+                                <option value="activity">Activities/Tours</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="ownerName">Owner/Manager Name <span class="required">*</span></label>
+                            <input type="text" id="ownerName" name="ownerName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number <span class="required">*</span></label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">Business Address <span class="required">*</span></label>
+                        <textarea id="address" name="address" placeholder="Include street address, city, province" required></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="province">Province <span class="required">*</span></label>
+                            <select id="province" name="province" required>
+                                <option value="">Select Province</option>
+                                <option value="phnom-penh">Phnom Penh</option>
+                                <option value="siem-reap">Siem Reap</option>
+                                <option value="battambang">Battambang</option>
+                                <option value="kampong-cham">Kampong Cham</option>
+                                <option value="kampong-thom">Kampong Thom</option>
+                                <option value="kampot">Kampot</option>
+                                <option value="kep">Kep</option>
+                                <option value="preah-vihear">Preah Vihear</option>
+                                <option value="pursat">Pursat</option>
+                                <option value="takeo">Takeo</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="website">Website (Optional)</label>
+                            <input type="url" id="website" name="website" placeholder="https://yourwebsite.com">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Business Description <span class="required">*</span></label>
+                        <textarea id="description" name="description" placeholder="Tell us about your business, services offered, and what makes you special" required></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="yearsInBusiness">Years in Business</label>
+                            <input type="number" id="yearsInBusiness" name="yearsInBusiness" min="0" max="50">
+                        </div>
+                        <div class="form-group">
+                            <label for="capacity">Capacity/Size</label>
+                            <input type="text" id="capacity" name="capacity" placeholder="e.g., 20 rooms, 50 seats, 8 passengers">
+                        </div>
+                    </div>
+  <div class="form-group">
+          <label for="businessImage">Business Image</label>
+          <input type="file" id="businessImage" accept="image/*">
+          <img id="imagePreview" />
+        </div>
+                    <div class="form-group">
+                        <label for="languages">Languages Spoken</label>
+                        <input type="text" id="languages" name="languages" placeholder="e.g., Khmer, English, French, Chinese">
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms">I agree to SafeTrip Cambodia's Terms of Service and Privacy Policy <span class="required">*</span></label>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="newsletter" name="newsletter">
+                        <label for="newsletter">I would like to receive updates about SafeTrip Cambodia</label>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Submit Registration</button>
+                </form>
+
+                <div class="success-message" id="successMessage">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Registration Successful!</h3>
+                    <p>Your business has been added to our network. Welcome to SafeTrip Cambodia!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 data-translate="footer-about-title">About SafeTrip Cambodia</h3>
+                    <p data-translate="footer-about-desc">We are dedicated to promoting safe and sustainable tourism in Cambodia while supporting local businesses and communities.</p>
+                </div>
+                <div class="footer-section">
+                    <h3 data-translate="footer-quick-title">Quick Links</h3>
+                    <p><a href="#" data-translate="footer-link-tours">Popular Tours</a></p>
+                    <p><a href="#" data-translate="footer-link-hotels">Hotels</a></p>
+                    <p><a href="#" data-translate="footer-link-guides">Tour Guides</a></p>
+                    <p><a href="#" data-translate="footer-link-transport">Transportation</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3 data-translate="footer-contact-title">Contact Info</h3>
+                    <p><i class="fas fa-envelope"></i> info@safetripcambodia.com</p>
+                    <p><i class="fas fa-phone"></i> +855 23 xxx xxx</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Phnom Penh, Cambodia</p>
+                </div>
+                <div class="footer-section">
+                    <h3 data-translate="footer-follow-title">Follow Us</h3>
+                    <p><a href="#"><i class="fab fa-facebook"></i> Facebook</a></p>
+                    <p><a href="#"><i class="fab fa-instagram"></i> Instagram</a></p>
+                    <p><a href="#"><i class="fab fa-twitter"></i> Twitter</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 SafeTrip Cambodia. <span data-translate="footer-rights">All rights reserved.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AI Chatbot -->
+    <div class="chatbot-container">
+        <button class="chatbot-trigger" onclick="toggleChatbot()">
+            <i class="fas fa-comments"></i>
+        </button>
+        <div class="chatbot-window" id="chatbot-window">
+            <div class="chatbot-header">
+                <h3 data-translate="chatbot-title">Travel Assistant</h3>
+                <button onclick="toggleChatbot()" style="background:none;border:none;color:white;font-size:1.2rem;">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="chatbot-messages" id="chatbot-messages">
+                <div class="message bot">
+                    <span data-translate="chatbot-welcome">Hello! I'm your AI travel assistant. How can I help you explore Cambodia today?</span>
+                </div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="chatbot-input" placeholder="Type your message..." data-translate-placeholder="chatbot-placeholder">
+                <button onclick="sendMessage()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script src="script.js"></script>
+    <script>
+        // Language translations
+        const translations = {
+            en: {
+                'site-title': 'TosTrip',
+                'nav-home': 'Home',
+                'nav-features': 'Features',
+                'nav-services': 'Services',
+                'nav-register': 'Register Business',
+                'nav-contact': 'Contact',
+                'hero-title': ' Cambodia at your fingertips',
+                'hero-subtitle': 'Travel safer, travel smarter',
+                'cta-explore': 'Explore Tours',
+                'cta-register': 'Join Our Network',
+                'features-title': 'Why Choose SafeTrip Cambodia?',
+                'feature-ai-title': 'AI Travel Assistant',
+                'feature-ai-desc': 'Get personalized recommendations and instant support from our intelligent chatbot available 24/7',
+                'feature-safe-title': 'Safe & Secure',
+                'feature-safe-desc': 'All our partners are verified and certified to ensure your safety and peace of mind',
+                'feature-guide-title': 'Expert Local Guides',
+                'feature-guide-desc': 'Connect with experienced local guides who know Cambodia\'s hidden gems and culture',
+                'feature-booking-title': 'Easy Booking',
+                'feature-booking-desc': 'Book tours, hotels, and transportation with just a few clicks on our user-friendly platform',
+                'feature-multilingual-title': 'Multilingual Support',
+                'feature-multilingual-desc': 'Available in Khmer, English, Chinese, Japanese, and Malay for your convenience',
+                'feature-partnership-title': 'Business Partnership',
+                'feature-partnership-desc': 'Join our network of hotels, restaurants, and service providers to grow your business',
+                'services-title': 'Our Services',
+                'service-tours-title': 'Tour Packages',
+                'service-tours-desc': 'Discover Angkor Wat, Phnom Penh, and hidden treasures with our curated tour packages',
+                'service-accommodation-title': 'Accommodation',
+                'service-accommodation-desc': 'Find the perfect place to stay from budget hostels to luxury resorts',
+                'service-transport-title': 'Transportation',
+                'service-transport-desc': 'Book reliable transportation including tuk-tuks, cars, and buses',
+                'service-dining-title': 'Dining Experiences',
+                'service-dining-desc': 'Taste authentic Khmer cuisine at our recommended restaurants',
+                'service-guide-title': 'Tour Guides',
+                'service-guide-desc': 'Professional multilingual guides to enhance your travel experience',
+                'service-support-title': '24/7 Support',
+                'service-support-desc': 'Round-the-clock customer support for any assistance you need',
+                'business-title': 'Join Our Business Network',
+                'business-subtitle': 'Partner with SafeTrip Cambodia to reach more customers and grow your tourism business',
+                'business-hotels-title': 'Hotels & Resorts',
+                'business-hotels-desc': 'List your property and reach international travelers',
+                'business-restaurants-title': 'Restaurants',
+                'business-restaurants-desc': 'Showcase your cuisine to food-loving tourists',
+                'business-transport-title': 'Transportation',
+                'business-transport-desc': 'Offer your transport services to travelers',
+                'business-guides-title': 'Tour Guides',
+                'business-guides-desc': 'Connect with tourists seeking authentic experiences',
+                'business-register-btn': 'Register Your Business',
+                'footer-about-title': 'About SafeTrip Cambodia',
+                'footer-about-desc': 'We are dedicated to promoting safe and sustainable tourism in Cambodia while supporting local businesses and communities.',
+                'footer-quick-title': 'Quick Links',
+                'footer-link-tours': 'Popular Tours',
+                'footer-link-hotels': 'Hotels',
+                'footer-link-guides': 'Tour Guides',
+                'footer-link-transport': 'Transportation',
+                'footer-contact-title': 'Contact Info',
+                'footer-follow-title': 'Follow Us',
+                'footer-rights': 'All rights reserved.',
+                'chatbot-title': 'Travel Assistant',
+                'chatbot-welcome': 'Hello! I\'m your AI travel assistant. How can I help you explore Cambodia today?',
+                'chatbot-placeholder': 'Type your message...'
+            },
+            km: {
+                'site-title': 'TosTrip',
+                'nav-home': 'ទំព័រដើម',
+                'nav-features': 'លក្ខណៈពិសេស',
+                'nav-services': 'សេវាកម្ម',
+                'nav-register': 'ចុះបញ្ជីអាជីវកម្ម',
+                'nav-contact': 'ទំនាក់ទំនង',
+                'hero-title': 'យល់ដឹងពីអ្វីគ្រប់យ៉ាងអំពីប្រទេសកម្ពុជា',
+                'hero-subtitle': 'ដៃគូដែលអាចទុកចិត្តបានសម្រាប់បទពិសោធន៍ធ្វើដំណើរប្រកបដោយសុវត្ថិភាព និងចាំបាន់នៅក្នុងព្រះរាជាណាចក្រនៃភាពអស្ចារ្យ',
+                'cta-explore': 'ស្វែងរកដំណើរទេសចរណ៍',
+                'cta-register': 'ចូលរួមបណ្តាញរបស់យើង',
+                'features-title': 'ហេតុអ្វីបានជាជ្រើសរើស SafeTrip កម្ពុជា?',
+                'feature-ai-title': 'ជំនួយការធ្វើដំណើរ AI',
+                'feature-ai-desc': 'ទទួលបានការណែនាំផ្ទាល់ខ្លួន និងការគាំទ្រភ្លាមៗពី chatbot ឆ្លាតវៃរបស់យើងដែលមាន 24/7',
+                'feature-safe-title': 'សុវត្ថិភាព និងសន្តិសុខ',
+                'feature-safe-desc': 'ដៃគូទាំងអស់របស់យើងត្រូវបានផ្ទៀងផ្ទាត់ និងបញ្ជាក់ដើម្បីធានាសុវត្ថិភាព និងចិត្តសុខរបស់អ្នក',
+                'feature-guide-title': 'មគ្គុទ្ទេសក៍មូលដ្ឋានជំនាញ',
+                'feature-guide-desc': 'ភ្ជាប់ទំនាក់ទំនងជាមួយមគ្គុទ្ទេសក៍មូលដ្ឋានដែលមានបទពិសោធន៍ដែលស្គាល់ពីកន្លែងលាក់កំបាំង និងវប្បធម៌កម្ពុជា',
+                'feature-booking-title': 'ការកក់ងាយ',
+                'feature-booking-desc': 'កក់ដំណើរទេសចរណ៍ សណ្ឋាគារ និងការដឹកជញ្ជូនគ្រាន់តែចុចពីរបីដងលើវេទិកាងាយប្រើរបស់យើង',
+                'feature-multilingual-title': 'ការគាំទ្រពហុភាសា',
+                'feature-multilingual-desc': 'មានជាភាសាខ្មែរ អង់គ្លេស ចិន ជប៉ុន និងម៉ាឡេសុីយ៍ ដើម្បីសម្រួលដល់អ្នក',
+                'feature-partnership-title': 'ភាពជាដៃគូអាជីវកម្ម',
+                'feature-partnership-desc': 'ចូលរួមបណ្តាញសណ្ឋាគារ ភោជនីយដ្ឋាន និងអ្នកផ្តល់សេវារបស់យើងដើម្បីពង្រីកអាជីវកម្មរបស់អ្នក',
+                'services-title': 'សេវាកម្មរបស់យើង',
+                'service-tours-title': 'កញ្ចប់ដំណើរទេសចរណ៍',
+                'service-tours-desc': 'រកឃើញនគរវត្ត រាជធានីភ្នំពេញ និងកំបាំងទ្រព្យសម្បត្តិជាមួយកញ្ចប់ដំណើរទេសចរណ៍ដែលបានជ្រើសរើសរបស់យើង',
+                'service-accommodation-title': 'កន្លែងស្នាក់នៅ',
+                'service-accommodation-desc': 'រកកន្លែងស្នាក់នៅដ៏ល្អឥតខ្ចោះចាប់ពីផ្ទះសំណាក់តម្លៃថោករហូតដល់រិសត លុយក្រុយ',
+                'service-transport-title': 'ការដឹកជញ្ជូន',
+                'service-transport-desc': 'កក់ការដឹកជញ្ជូនដែលអាចទុកចិត្តបាន រួមទាំងតុកតុក រថយន្ត និងរថយន្តក្រុង',
+                'service-dining-title': 'បទពិសោធន៍ញាំអាហារ',
+                'service-dining-desc': 'ភ្លក្សរសជាតិម្ហូបខ្មែរពិតប្រាកដនៅភោជនីយដ្ឋានដែលយើងបានណែនាំ',
+                'service-guide-title': 'មគ្គុទ្ទេសក៍ទេសចរណ៍',
+                'service-guide-desc': 'មគ្គុទ្ទេសក៍ពហុភាសាវិជ្ជាជីវៈដើម្បីបង្កើនបទពិសោធន៍ធ្វើដំណើររបស់អ្នក',
+                'service-support-title': 'ការគាំទ្រ 24/7',
+                'service-support-desc': 'ការគាំទ្រអតិថិជនពេញម៉ោង សម្រាប់ការជួយជ្រោមជ្រែងណាដែលអ្នកត្រូវការ',
+                'business-title': 'ចូលរួមបណ្តាញអាជីវកម្មរបស់យើង',
+                'business-subtitle': 'ក្លាយជាដៃគូជាមួយ SafeTrip កម្ពុជា ដើម្បីឈានដល់អតិថិជនកាន់តែច្រើន និងពង្រីកអាជីវកម្មទេសចរណ៍របស់អ្នក',
+                'business-hotels-title': 'សណ្ឋាគារ និងរិសត',
+                'business-hotels-desc': 'ដាក់បញ្ជីអចលនទ្រព្យរបស់អ្នក ហើយឈានដល់ភ្ញៀវទេសចរអន្តរជាតិ',
+                'business-restaurants-title': 'ភោជនីយដ្ឋាន',
+                'business-restaurants-desc': 'បង្ហាញម្ហូបអាហាររបស់អ្នកទៅកាន់ភ្ញៀវទេសចរដែលចូលចិត្តអាហារ',
+                'business-transport-title': 'ការដឹកជញ្ជូន',
+                'business-transport-desc': 'ផ្តល់សេវាកម្មដឹកជញ្ជូនរបស់អ្នកដល់អ្នកធ្វើដំណើរ',
+                'business-guides-title': 'មគ្គុទ្ទេសក៍ទេសចរណ៍',
+                'business-guides-desc': 'ភ្ជាប់ទំនាក់ទំនងជាមួយភ្ញៀវទេសចរដែលស្វែងរកបទពិសោធន៍ពិតប្រាកដ',
+                'business-register-btn': 'ចុះបញ្ជីអាជីវកម្មរបស់អ្នក',
+                'footer-about-title': 'អំពី SafeTrip កម្ពុជា',
+                'footer-about-desc': 'យើងលះបង់ដើម្បីលើកកម្ពស់ទេសចរណ៍ប្រកបដោយសុវត្ថិភាព និងនិរន្តរភាពនៅកម្ពុជា ដោយគាំទ្រអាជីវកម្មមូលដ្ឋាន និងសហគមន៍។',
+                'footer-quick-title': 'តំណភ្ជាប់រហ័ស',
+                'footer-link-tours': 'ដំណើរទេសចរណ៍ពេញនិយម',
+                'footer-link-hotels': 'សណ្ឋាគារ',
+                'footer-link-guides': 'មគ្គុទ្ទេសក៍ទេសចរណ៍',
+                'footer-link-transport': 'ការដឹកជញ្ជូន',
+                'footer-contact-title': 'ព័ត៌មានទំនាក់ទំនង',
+                'footer-follow-title': 'តាមដានយើង',
+                'footer-rights': 'រក្សាសិទ្ធិគ្រប់យ៉ាង។',
+                'chatbot-title': 'ជំនួយការធ្វើដំណើរ',
+                'chatbot-welcome': 'សួស្តី! ខ្ញុំជាជំនួយការធ្វើដំណើរ AI របស់អ្នក។ តើខ្ញុំអាចជួយអ្នកស្វែងរកកម្ពុជាដោយរបៀបណា?',
+                'chatbot-placeholder': 'វាយបញ្ចូលសាររបស់អ្នក...'
+            },
+            zh: {
+                'site-title': 'SafeTrip 柬埔寨',
+                'nav-home': '首页',
+                'nav-features': '特色',
+                'nav-services': '服务',
+                'nav-register': '商家注册',
+                'nav-contact': '联系我们',
+                'hero-title': '发现神奇的柬埔寨',
+                'hero-subtitle': '您在神奇王国中安全难忘旅行体验的可信赖合作伙伴',
+                'cta-explore': '探索旅游',
+                'cta-register': '加入我们的网络',
+                'features-title': '为什么选择 SafeTrip 柬埔寨？',
+                'feature-ai-title': 'AI旅行助手',
+                'feature-ai-desc': '从我们24/7在线的智能聊天机器人获得个性化推荐和即时支持',
+                'feature-safe-title': '安全可靠',
+                'feature-safe-desc': '我们的所有合作伙伴都经过验证和认证，确保您的安全和安心',
+                'feature-guide-title': '专业本地导游',
+                'feature-guide-desc': '与了解柬埔寨隐藏宝石和文化的经验丰富的本地导游连接',
+                'feature-booking-title': '轻松预订',
+                'feature-booking-desc': '在我们用户友好的平台上只需几次点击即可预订旅游、酒店和交通',
+                'feature-multilingual-title': '多语言支持',
+                'feature-multilingual-desc': '提供高棉语、英语、中文、日语和马来语，方便您使用',
+                'feature-partnership-title': '商业合作伙伴',
+                'feature-partnership-desc': '加入我们的酒店、餐厅和服务提供商网络，发展您的业务',
+                'services-title': '我们的服务',
+                'service-tours-title': '旅游套餐',
+                'service-tours-desc': '通过我们精选的旅游套餐发现吴哥窟、金边和隐藏的宝藏',
+                'service-accommodation-title': '住宿',
+                'service-accommodation-desc': '从经济型青年旅社到豪华度假村，找到完美的住宿地点',
+                'service-transport-title': '交通',
+                'service-transport-desc': '预订可靠的交通工具，包括嘟嘟车、汽车和巴士',
+                'service-dining-title': '用餐体验',
+                'service-dining-desc': '在我们推荐的餐厅品尝正宗的高棉美食',
+                'service-guide-title': '导游服务',
+                'service-guide-desc': '专业多语言导游，提升您的旅行体验',
+                'service-support-title': '24/7 支持',
+                'service-support-desc': '全天候客户支持，为您提供任何所需的帮助',
+                'business-title': '加入我们的商业网络',
+                'business-subtitle': '与 SafeTrip 柬埔寨合作，接触更多客户并发展您的旅游业务',
+                'business-hotels-title': '酒店和度假村',
+                'business-hotels-desc': '列出您的物业，接触国际旅客',
+                'business-restaurants-title': '餐厅',
+                'business-restaurants-desc': '向喜爱美食的游客展示您的料理',
+                'business-transport-title': '交通',
+                'business-transport-desc': '向旅客提供您的交通服务',
+                'business-guides-title': '导游',
+                'business-guides-desc': '与寻求真实体验的游客建立联系',
+                'business-register-btn': '注册您的业务',
+                'footer-about-title': '关于 SafeTrip 柬埔寨',
+                'footer-about-desc': '我们致力于在柬埔寨推广安全和可持续的旅游业，同时支持当地企业和社区。',
+                'footer-quick-title': '快速链接',
+                'footer-link-tours': '热门旅游',
+                'footer-link-hotels': '酒店',
+                'footer-link-guides': '导游',
+                'footer-link-transport': '交通',
+                'footer-contact-title': '联系信息',
+                'footer-follow-title': '关注我们',
+                'footer-rights': '版权所有。',
+                'chatbot-title': '旅行助手',
+                'chatbot-welcome': '您好！我是您的AI旅行助手。今天我如何帮助您探索柬埔寨？',
+                'chatbot-placeholder': '输入您的消息...'
+            },
+            ja: {
+                'site-title': 'TosTrip',
+                'nav-home': 'ホーム',
+                'nav-features': '機能',
+                'nav-services': 'サービス',
+                'nav-register': '事業者登録',
+                'nav-contact': 'お問い合わせ',
+                'hero-title': '指先でカンボジアを体験',
+                'hero-subtitle': 'さんます安全に、さんしなく旅します',
+                'cta-explore': 'ツアーを探索',
+                'cta-register': 'ネットワークに参加',
+                'features-title': 'SafeTrip カンボジアを選ぶ理由',
+                'feature-ai-title': 'AI旅行アシスタント',
+                'feature-ai-desc': '24時間365日利用可能なインテリジェントチャットボットからパーソナライズされた推奨事項と即座のサポートを受ける',
+                'feature-safe-title': '安全・安心',
+                'feature-safe-desc': '当社のパートナーはすべて検証・認定されており、お客様の安全と安心を保証します',
+                'feature-guide-title': '専門地元ガイド',
+                'feature-guide-desc': 'カンボジアの隠れた宝石と文化を知る経験豊富な地元ガイドとつながる',
+                'feature-booking-title': '簡単予約',
+                'feature-booking-desc': 'ユーザーフレンドリーなプラットフォームで数クリックでツアー、ホテル、交通を予約',
+                'feature-multilingual-title': '多言語サポート',
+                'feature-multilingual-desc': 'クメール語、英語、中国語、日本語、マレー語でご利用いただけます',
+                'feature-partnership-title': 'ビジネスパートナーシップ',
+                'feature-partnership-desc': 'ホテル、レストラン、サービスプロバイダーのネットワークに参加してビジネスを成長させる',
+                'services-title': '私たちのサービス',
+                'service-tours-title': 'ツアーパッケージ',
+                'service-tours-desc': '厳選されたツアーパッケージでアンコールワット、プノンペン、隠れた宝物を発見',
+                'service-accommodation-title': '宿泊施設',
+                'service-accommodation-desc': 'バジェットホステルから高級リゾートまで、完璧な滞在場所を見つける',
+                'service-transport-title': '交通',
+                'service-transport-desc': 'トゥクトゥク、車、バスを含む信頼できる交通手段を予約',
+                'service-dining-title': 'ダイニング体験',
+                'service-dining-desc': '推奨レストランで本格的なクメール料理を味わう',
+                'service-guide-title': 'ツアーガイド',
+                'service-guide-desc': 'あなたの旅行体験を向上させる専門的な多言語ガイド',
+                'service-support-title': '24時間サポート',
+                'service-support-desc': '必要な支援のための24時間体制のカスタマーサポート',
+                'business-title': 'ビジネスネットワークに参加',
+                'business-subtitle': 'SafeTrip カンボジアと提携してより多くの顧客にリーチし、観光ビジネスを成長させる',
+                'business-hotels-title': 'ホテル＆リゾート',
+                'business-hotels-desc': 'あなたの施設をリストして国際的な旅行者にリーチ',
+                'business-restaurants-title': 'レストラン',
+                'business-restaurants-desc': '食べ物を愛する観光客にあなたの料理を紹介',
+                'business-transport-title': '交通',
+                'business-transport-desc': '旅行者にあなたの交通サービスを提供',
+                'business-guides-title': 'ツアーガイド',
+                'business-guides-desc': '本物の体験を求める観光客とつながる',
+                'business-register-btn': 'あなたのビジネスを登録',
+                'footer-about-title': 'SafeTrip カンボジアについて',
+                'footer-about-desc': '私たちは地元のビジネスとコミュニティを支援しながら、カンボジアでの安全で持続可能な観光を推進することに専念しています。',
+                'footer-quick-title': 'クイックリンク',
+                'footer-link-tours': '人気ツアー',
+                'footer-link-hotels': 'ホテル',
+                'footer-link-guides': 'ツアーガイド',
+                'footer-link-transport': '交通',
+                'footer-contact-title': '連絡先',
+                'footer-follow-title': 'フォロー',
+                'footer-rights': '全著作権所有。',
+                'chatbot-title': '旅行アシスタント',
+                'chatbot-welcome': 'こんにちは！私はあなたのAI旅行アシスタントです。今日はカンボジアの探索をどのようにお手伝いできますか？',
+                'chatbot-placeholder': 'メッセージを入力...'
+            },
+            ms: {
+                'site-title': 'SafeTrip Cambodia',
+                'nav-home': 'Utama',
+                'nav-features': 'Ciri-ciri',
+                'nav-services': 'Perkhidmatan',
+                'nav-register': 'Daftar Perniagaan',
+                'nav-contact': 'Hubungi',
+                'hero-title': 'Temui Cambodia yang Menakjubkan',
+                'hero-subtitle': 'Rakan kongsi terpercaya anda untuk pengalaman perjalanan yang selamat dan tidak terlupakan di Kerajaan Keajaiban',
+                'cta-explore': 'Terokai Lawatan',
+                'cta-register': 'Sertai Rangkaian Kami',
+                'features-title': 'Mengapa Pilih SafeTrip Cambodia?',
+                'feature-ai-title': 'Pembantu Perjalanan AI',
+                'feature-ai-desc': 'Dapatkan cadangan peribadi dan sokongan segera dari chatbot pintar kami yang tersedia 24/7',
+                'feature-safe-title': 'Selamat & Terjamin',
+                'feature-safe-desc': 'Semua rakan kongsi kami disahkan dan diperakui untuk memastikan keselamatan dan ketenangan minda anda',
+                'feature-guide-title': 'Pemandu Tempatan Pakar',
+                'feature-guide-desc': 'Berhubung dengan pemandu tempatan berpengalaman yang mengetahui permata tersembunyi dan budaya Cambodia',
+                'feature-booking-title': 'Tempahan Mudah',
+                'feature-booking-desc': 'Tempah lawatan, hotel, dan pengangkutan dengan hanya beberapa klik di platform mesra pengguna kami',
+                'feature-multilingual-title': 'Sokongan Berbilang Bahasa',
+                'feature-multilingual-desc': 'Tersedia dalam bahasa Khmer, Inggeris, Cina, Jepun, dan Melayu untuk kemudahan anda',
+                'feature-partnership-title': 'Perkongsian Perniagaan',
+                'feature-partnership-desc': 'Sertai rangkaian hotel, restoran, dan penyedia perkhidmatan kami untuk mengembangkan perniagaan anda',
+                'services-title': 'Perkhidmatan Kami',
+                'service-tours-title': 'Pakej Lawatan',
+                'service-tours-desc': 'Temui Angkor Wat, Phnom Penh, dan khazanah tersembunyi dengan pakej lawatan terpilih kami',
+                'service-accommodation-title': 'Penginapan',
+                'service-accommodation-desc': 'Cari tempat yang sempurna untuk menginap dari hostel bajet hingga resort mewah',
+                'service-transport-title': 'Pengangkutan',
+                'service-transport-desc': 'Tempah pengangkutan yang boleh dipercayai termasuk tuk-tuk, kereta, dan bas',
+                'service-dining-title': 'Pengalaman Bersantap',
+                'service-dining-desc': 'Rasa masakan Khmer asli di restoran yang kami cadangkan',
+                'service-guide-title': 'Pemandu Lawatan',
+                'service-guide-desc': 'Pemandu berbilang bahasa profesional untuk meningkatkan pengalaman perjalanan anda',
+                'service-support-title': 'Sokongan 24/7',
+                'service-support-desc': 'Sokongan pelanggan sepanjang masa untuk sebarang bantuan yang anda perlukan',
+                'business-title': 'Sertai Rangkaian Perniagaan Kami',
+                'business-subtitle': 'Bekerjasama dengan SafeTrip Cambodia untuk mencapai lebih ramai pelanggan dan mengembangkan perniagaan pelancongan anda',
+                'business-hotels-title': 'Hotel & Resort',
+                'business-hotels-desc': 'Senaraikan hartanah anda dan capai pelancong antarabangsa',
+                'business-restaurants-title': 'Restoran',
+                'business-restaurants-desc': 'Tunjukkan masakan anda kepada pelancong yang gemar makanan',
+                'business-transport-title': 'Pengangkutan',
+                'business-transport-desc': 'Tawarkan perkhidmatan pengangkutan anda kepada pelancong',
+                'business-guides-title': 'Pemandu Lawatan',
+                'business-guides-desc': 'Berhubung dengan pelancong yang mencari pengalaman asli',
+                'business-register-btn': 'Daftarkan Perniagaan Anda',
+                'footer-about-title': 'Mengenai SafeTrip Cambodia',
+                'footer-about-desc': 'Kami berdedikasi untuk mempromosikan pelancongan yang selamat dan lestari di Cambodia sambil menyokong perniagaan dan komuniti tempatan.',
+                'footer-quick-title': 'Pautan Pantas',
+                'footer-link-tours': 'Lawatan Popular',
+                'footer-link-hotels': 'Hotel',
+                'footer-link-guides': 'Pemandu Lawatan',
+                'footer-link-transport': 'Pengangkutan',
+                'footer-contact-title': 'Maklumat Hubungan',
+                'footer-follow-title': 'Ikuti Kami',
+                'footer-rights': 'Hak cipta terpelihara.',
+                'chatbot-title': 'Pembantu Perjalanan',
+                'chatbot-welcome': 'Halo! Saya pembantu perjalanan AI anda. Bagaimana saya boleh membantu anda meneroka Cambodia hari ini?',
+                'chatbot-placeholder': 'Taip mesej anda...'
+            }
+        };
+
+        let currentLanguage = 'en';
+
+        // Language functions
+        function toggleLanguageDropdown() {
+            const dropdown = document.getElementById('language-dropdown');
+            dropdown.classList.toggle('show');
+        }
+
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            const languageNames = {
+                'en': 'English',
+                'km': 'ខ្មែរ',
+                'zh': '中文',
+                'ja': '日本語',
+                'ms': 'Bahasa Melayu'
+            };
+            
+            document.getElementById('current-language').textContent = languageNames[lang];
+            
+            // Update all translated elements
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+
+            // Update placeholder text
+            const chatInput = document.getElementById('chatbot-input');
+            if (chatInput) {
+                chatInput.placeholder = translations[lang]['chatbot-placeholder'] || 'Type your message...';
+            }
+
+            toggleLanguageDropdown();
+        }
+
+    
+        function toggleChatbot() {
+            const chatbotWindow = document.getElementById('chatbot-window');
+            chatbotOpen = !chatbotOpen;
+            chatbotWindow.style.display = chatbotOpen ? 'flex' : 'none';
+            
+            if (chatbotOpen) {
+                document.getElementById('chatbot-input').focus();
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatbot-input');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            const messagesContainer = document.getElementById('chatbot-messages');
+            
+            
+            const userMessage = document.createElement('div');
+            userMessage.className = 'message user';
+            userMessage.textContent = message;
+            messagesContainer.appendChild(userMessage);
+            
+            // Generate bot response
+            setTimeout(() => {
+                const botMessage = document.createElement('div');
+                botMessage.className = 'message bot';
+                botMessage.textContent = generateResponse(message.toLowerCase());
+                messagesContainer.appendChild(botMessage);
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }, 1000);
+            
+            input.value = '';
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+// ===== Embassy Directory =====
+const embassies = {
+    usa: {
+        name: "U.S. Embassy Phnom Penh",
+        address: "No. 1, Street 96, Phnom Penh, Cambodia",
+        phone: "+855 23 728 000",
+        map: "https://goo.gl/maps/B4E1D8VzR5y7a5MXA"
+    },
+    uk: {
+        name: "British Embassy Phnom Penh",
+        address: "No. 27-29 Street 75, Phnom Penh, Cambodia",
+        phone: "+855 23 427 124",
+        map: "https://goo.gl/maps/3yQ6jF5m1G62"
+    },
+    malaysia: {
+        name: "Embassy of Malaysia Phnom Penh",
+        address: "No. 220-222, Preah Norodom Blvd, Phnom Penh, Cambodia",
+        phone: "+855 23 216 233",
+        map: "https://goo.gl/maps/hJ3X2e9kQbK2"
+    }
+};
+
+// ===== Chatbot Responses =====
+const chatbotResponses = {
+    en: {
+        greeting: [
+            "Hello! How can I help you today?",
+            "Hi there! Need any assistance?",
+            "Hey! How’s your trip going?"
+        ],
+        default: [
+            "Sorry, I didn’t understand that. Could you try again?",
+            "Hmm, can you rephrase that?",
+            "I’m not sure about that. Try asking in a different way."
+        ],
+        tours: [
+            "You can visit Angkor Wat in Siem Reap – it’s world famous!",
+            "Phnom Penh Royal Palace is a must-see attraction.",
+            "Try a Mekong River sunset cruise for something relaxing."
+        ],
+        hotels: [
+            "Try Raffles Hotel Le Royal in Phnom Penh.",
+            "Sofitel Phnom Penh Phokeethra is a top choice.",
+            "Budget-friendly? Try Okay Boutique Hotel."
+        ],
+        transport: [
+            "You can use the Grab app for tuk tuks and cars.",
+            "Local buses are available but tuk tuks are faster.",
+            "Taxi services are reliable but more expensive."
+        ],
+        restaurants: [
+            "Romdeng Restaurant is very popular!",
+            "Try Khmer Surin for Cambodian dishes.",
+            "Friends the Restaurant is great for social dining."
+        ],
+        guides: [
+            "You can hire licensed local guides at Angkor Wat.",
+            "Local guides can be booked through hotels.",
+            "Some guides also offer walking food tours in Phnom Penh."
+        ],
+        halal: [
+            "🍴 Try **Al-Serkal Halal Restaurant** near Central Market.",
+            "🍴 **Kuching Halal Restaurant** on Street 19 is popular with locals.",
+            "🍴 For Indian halal food, visit **Dosa Corner Phnom Penh**.",
+            "🍴 **Hummus House** serves Middle Eastern halal dishes."
+        ]
+    }
+};
+
+// ===== Chatbot Response Function =====
+function generateResponse(message) {
+    const responses = chatbotResponses["en"]; // default to English
+    message = message.toLowerCase(); // normalize input
+
+    // ===== Passport lost case =====
+    if (message.includes('passport') || message.includes('lost passport')) {
+        return "I’m sorry to hear that you lost your passport. Could you please tell me which country you are from? I can guide you to the nearest embassy.";
+    }
+
+    // ===== Embassy lookup =====
+    const embassyKeywords = {
+        usa: ["usa", "united states", "american"],
+        uk: ["uk", "england", "britain", "british"],
+        malaysia: ["malaysia", "malaysian"]
+    };
+const halalFood = [
+    {
+        name: "Uncle foodie",
+        address: "Near Central Market, Phnom Penh",
+        map: "https://maps.app.goo.gl/3Bp2kig1ALkR8LWE9?g_st=ipc"
+    },
+    {
+        name: "Kuching Halal Restaurant",
+        address: "Street 19, Phnom Penh",
+        map: "https://goo.gl/maps/efgh5678"
+    },
+    {
+        name: "Dosa Corner Phnom Penh (Indian Halal)",
+        address: "Street 51, Phnom Penh",
+        map: "https://goo.gl/maps/ijkl91011"
+    },
+    {
+        name: "Hummus House (Middle Eastern)",
+        address: "Street 308, Phnom Penh",
+        map: "https://goo.gl/maps/mnop1213"
+    }
+];
+// ===== Vegetarian Food Directory =====
+const vegetarianFood = [
+    {
+        name: "Sacred Lotus Vegan Cafe",
+        address: "Street 135, Phnom Penh",
+        map: "https://share.google/Tn1Sn81By2DrUdg3Y"
+    },
+    {
+        name: "Masala Dosa Street Kitchen (Vegetarian Indian)",
+        address: "Street 278, Phnom Penh",
+        map: "https://share.google/wRjE88n8w0S3VumVf"
+    },
+ 
+    {
+        name: "Evergreen Vegetarian House",
+        address: "Monivong Blvd, Phnom Penh",
+        map: "https://goo.gl/maps/mnop9012"
+    }
+];
+
+    for (const country in embassyKeywords) {
+        if (embassyKeywords[country].some(keyword => message.includes(keyword))) {
+            const e = embassies[country];
+            return `Here’s the nearest embassy for you:<br><br>
+            📍 <b>${e.name}</b><br>
+            ${e.address}<br>
+            ☎️ ${e.phone}<br>
+            👉 <a href="${e.map}" target="_blank">View on Google Maps</a>`;
+        }
+    }
+       if (message.includes('halal') || message.includes('muslim food') || message.includes('islamic food')) {
+        let reply = "Here are some halal food options nearby:<br><br>";
+        halalFood.forEach(r => {
+            reply += `🍴 <b>${r.name}</b><br>
+            📍 ${r.address}<br>
+            👉 <a href="${r.map}" target="_blank">View on Google Maps</a><br><br>`;
+        });
+        return reply;
+    }
+// Vegetarian restaurant keywords
+if (message.includes('vegetarian') || message.includes('vegan') || message.includes('veg food')) {
+    let reply = "Here are some vegetarian/vegan food options nearby:<br><br>";
+    vegetarianFood.forEach(r => {
+        reply += `🥗 <b>${r.name}</b><br>
+        📍 ${r.address}<br>
+        👉 <a href="${r.map}" target="_blank">View on Google Maps</a><br><br>`;
+    });
+    return reply;
+}
+
+    // ===== Weak signal case =====
+    if (message.includes('weak signal') || message.includes('no internet') || message.includes('bad connection')) {
+        return "It looks like your signal is weak. You can switch to offline mode to keep accessing maps, phrases, and embassy contacts without internet.";
+    }
+
+    // ===== Tours =====
+    if (message.includes('tour') || message.includes('visit') || message.includes('angkor') || message.includes('siem reap')) {
+        return responses.tours[Math.floor(Math.random() * responses.tours.length)];
+    }
+
+    // ===== Hotels =====
+    if (message.includes('hotel') || message.includes('accommodation') || message.includes('stay')) {
+        return responses.hotels[Math.floor(Math.random() * responses.hotels.length)];
+    }
+
+    // ===== Transport =====
+    if (message.includes('transport') || message.includes('car') || message.includes('tuk tuk')) {
+        return responses.transport[Math.floor(Math.random() * responses.transport.length)];
+    }
+
+    // ===== Restaurants =====
+    if (message.includes('food') || message.includes('restaurant') || message.includes('eat')) {
+        return responses.restaurants[Math.floor(Math.random() * responses.restaurants.length)];
+    }
+
+    // ===== Halal food =====
+    if (message.includes('halal') || message.includes('muslim food') || message.includes('islamic food')) {
+        return responses.halal[Math.floor(Math.random() * responses.halal.length)];
+    }
+
+    // ===== Guides =====
+    if (message.includes('guide') || message.includes('local')) {
+        return responses.guides[Math.floor(Math.random() * responses.guides.length)];
+    }
+
+    // ===== Greeting =====
+    if (message.includes('hello') || message.includes('hi') || message.includes('hey')) {
+        return responses.greeting[Math.floor(Math.random() * responses.greeting.length)];
+    }
+
+    // ===== Default =====
+    return responses.default[Math.floor(Math.random() * responses.default.length)];
+}
+
+// ===== UI + Event Listeners =====
+document.addEventListener('DOMContentLoaded', function() {
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Scroll animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.scroll-animation').forEach(el => {
+        observer.observe(el);
+    });
+
+    // Chatbot enter key support
+    document.getElementById('chatbot-input').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            sendMessage();
+        }
+    });
+
+    // Close language dropdown when clicking outside
+    document.addEventListener('click', function(event) {
+        const dropdown = document.getElementById('language-dropdown');
+        const button = document.querySelector('.language-btn');
+        
+        if (dropdown && button && !button.contains(event.target) && !dropdown.contains(event.target)) {
+            dropdown.classList.remove('show');
+        }
+    });
+});
+
+// Close chatbot when clicking outside
+let chatbotOpen = false; // make sure this is defined
+document.addEventListener('click', function(event) {
+    const chatbotContainer = document.querySelector('.chatbot-container');
+    const chatbotWindow = document.getElementById('chatbot-window');
+    
+    if (chatbotOpen && chatbotContainer && !chatbotContainer.contains(event.target)) {
+        chatbotWindow.style.display = 'none';
+        chatbotOpen = false;
+    }
+});
+
+// ===== Send Message Function =====
+function sendMessage() {
+    const inputField = document.getElementById('chatbot-input');
+    const message = inputField.value.trim();
+    if (!message) return;
+
+    const chatWindow = document.getElementById('chatbot-messages');
+
+    // User message
+    const userMsg = document.createElement('div');
+    userMsg.className = 'user-message';
+    userMsg.innerHTML = message;
+    chatWindow.appendChild(userMsg);
+
+    // Bot response
+    const botMsg = document.createElement('div');
+    botMsg.className = 'bot-message';
+    botMsg.innerHTML = generateResponse(message);
+    chatWindow.appendChild(botMsg);
+
+    // Scroll to bottom
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+
+    // Clear input
+    inputField.value = '';
+}
+
+
+// ===== Embassy Directory =====
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Scroll animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.scroll-animation').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Chatbot enter key support
+            document.getElementById('chatbot-input').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+
+            // Close language dropdown when clicking outside
+            document.addEventListener('click', function(event) {
+                const dropdown = document.getElementById('language-dropdown');
+                const button = document.querySelector('.language-btn');
+                
+                if (!button.contains(event.target) && !dropdown.contains(event.target)) {
+                    dropdown.classList.remove('show');
+                }
+            });
+        });
+
+        // Close chatbot when clicking outside
+        document.addEventListener('click', function(event) {
+            const chatbotContainer = document.querySelector('.chatbot-container');
+            const chatbotWindow = document.getElementById('chatbot-window');
+            
+            if (chatbotOpen && !chatbotContainer.contains(event.target)) {
+                chatbotWindow.style.display = 'none';
+                chatbotOpen = false;
+            }
+        });
+    </script>
+    <script src="book.js"></script>
+    <script src="chat.js"></script>
+</body>
+</html>
